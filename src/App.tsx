@@ -7,13 +7,28 @@ import './App.css'
 const courses = getData()
 
 // @ts-ignore
-const telegram: any = window.Telegram.WepApp
+const telegram: any = window?.Telegram?.WepApp
 
 function App() {
   const [cartItems, setCartItems] = useState<(TData & { quantity: number })[]>([])
 
+  // useEffect(() => {
+  //   telegram.ready()
+  // })
+
   useEffect(() => {
-    telegram.ready()
+    const checkTelegramAPI = () => {
+      if (window.Telegram?.WebApp) {
+        const telegram = window.Telegram.WebApp
+        telegram.ready()
+        console.log('Telegram WebApp API muvaffaqiyatli yuklandi!')
+      } else {
+        console.error('Telegram WebApp API hali yuklanmagan. Tekshirish davom etmoqda...')
+        setTimeout(checkTelegramAPI, 500) // 500 ms dan keyin yana tekshirib ko'radi
+      }
+    }
+
+    checkTelegramAPI()
   }, [])
 
   const onAddItem = (item: TData) => {
