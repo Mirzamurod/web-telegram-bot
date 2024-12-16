@@ -69,10 +69,10 @@ function App() {
     const queryId = telegram.initDataUnsave?.query_id
 
     if (queryId) {
-      fetch('http://localhost:8000/web-data', {
+      fetch('https://webtelegrambackend.onrender.com/web-data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cartItems),
+        body: JSON.stringify({ products: cartItems, queryId }),
       })
     } else telegram.sendData(JSON.stringify(cartItems))
   }, [cartItems])
