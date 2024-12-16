@@ -66,7 +66,7 @@ function App() {
   }
 
   const onSendData = useCallback(() => {
-    const queryId = telegram.initDataUnsave?.query_id
+    const queryId = telegram.initDataUnsafe?.query_id
 
     if (queryId) {
       fetch('https://webtelegrambackend.onrender.com/web-data', {
