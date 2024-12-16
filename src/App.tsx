@@ -6,20 +6,18 @@ import './App.css'
 
 const courses = getData()
 
-// @ts-ignore
-const telegram: any = window?.Telegram?.WepApp
-
 function App() {
   const [cartItems, setCartItems] = useState<(TData & { quantity: number })[]>([])
 
-  // useEffect(() => {
-  //   telegram.ready()
-  // })
+  // @ts-ignore
+  const telegram = window.Telegram.WebApp
 
   useEffect(() => {
     const checkTelegramAPI = () => {
+      // @ts-ignore
       if (window.Telegram?.WebApp) {
-        const telegram = window.Telegram.WebApp
+        // @ts-ignore
+        // const telegram = window.Telegram.WebApp
         telegram.ready()
         console.log('Telegram WebApp API muvaffaqiyatli yuklandi!')
       } else {
